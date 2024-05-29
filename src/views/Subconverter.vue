@@ -474,6 +474,7 @@ export default {
           "sub.cm": "https://sub.cm/short",
         },
         customBackend: {
+          "Sparrow后端": "https://suc.spw.dynu.net",
           "肥羊增强型后端【vless reality+hy1+hy2】": "https://url.v1.mk",
           "肥羊备用后端【vless reality+hy1+hy2】": "https://sub.d1.mk",
           "つつ-多地防失联【负载均衡+国内优化】": "https://api.tsutsu.one",
@@ -483,6 +484,7 @@ export default {
           "sub作者&lhie1提供": "https://api.dler.io",
         },
         backendOptions: [
+          {value: "https://suc.spw.dynu.net"},
           {value: "https://url.v1.mk"},
           {value: "https://sub.d1.mk"},
           {value: "https://api.tsutsu.one"},
@@ -495,6 +497,10 @@ export default {
           {
             label: "通用",
             options: [
+              {
+                label: "Sparrow",
+                value: "https://sub.spw.dynu.net/Clash/Mulder_Full_MultiMode.ini"
+              },
               {
                 label: "默认",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
@@ -889,9 +895,9 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: this.getUrlParam() == "" ? "https://url.v1.mk" : this.getUrlParam(),
+        customBackend: this.getUrlParam() == "" ? "https://suc.spw.dynu.net" : this.getUrlParam(),
         shortType: "https://v1.mk/short",
-        remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini",
+        remoteConfig: "https://sub.spw.dynu.net/Clash/Mulder_Full_MultiMode.ini",
         excludeRemarks: "",
         includeRemarks: "",
         filename: "",
@@ -946,7 +952,7 @@ export default {
     this.isPC = this.$getOS().isPc;
   },
   mounted() {
-    this.tanchuang();
+    //this.tanchuang();
     this.form.clientType = "clash";
     this.getBackendVersion();
     this.anhei();
@@ -1403,8 +1409,8 @@ export default {
             this.backendVersion = res.data.replace(/backend\n$/gm, "");
             this.backendVersion = this.backendVersion.replace("subconverter", "SubConverter");
             let a = this.form.customBackend.indexOf("url.v1.mk") !== -1 || this.form.customBackend.indexOf("sub.d1.mk") !== -1;
-            let b = this.form.customBackend.indexOf("127.0.0.1") !== -1;
-            a ? this.$message.success(`${this.backendVersion}` + "肥羊负载均衡增强版后端，已屏蔽免费节点池（会返回403），额外支持vless reality+hysteria+hysteria2订阅转换") : b ? this.$message.success(`${this.backendVersion}` + "本地局域网自建版后端") : this.$message.success(`${this.backendVersion}` + "官方原版后端不支持vless/hysteria订阅转换");
+            let b = this.form.customBackend.indexOf("suc.spw.dynu.net") !== -1;
+            a ? this.$message.success(`${this.backendVersion}` + "肥羊负载均衡增强版后端，已屏蔽免费节点池（会返回403），额外支持vless reality+hysteria+hysteria2订阅转换") : b ? this.$message.success(`${this.backendVersion}` + "Sparrow自建后端，额外支持vless reality+hysteria+hysteria2订阅转换") : this.$message.success(`${this.backendVersion}` + "官方原版后端不支持vless/hysteria订阅转换");
           })
           .catch(() => {
             this.$message.error("请求SubConverter版本号返回数据失败，该后端不可用！");
